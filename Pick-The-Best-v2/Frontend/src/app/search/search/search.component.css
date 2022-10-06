@@ -1,0 +1,37 @@
+.searchTemplate{
+    width: 100%;
+    border-bottom: 2px solid rgb(69, 99, 249);
+    padding: 10px 10px 10px 10px;
+    height:60px;
+}
+
+.container-fluid{
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.input-group{
+    width:500px;
+}
+
+.result-container{
+    align-items: baseline;
+}
+
+.card{
+    padding: 5px 5px 5px 5px;
+    margin: 30px 0 0 30px;
+    border: 2px solid rgb(113, 113, 213);
+    display: inline-block;
+}
+
+.card-title{
+    font-weight: bold;
+}
+.container{
+    margin-top: 40px;;
+}
+.customSpinner{
+    margin-top:20px;
+    margin-left:20px
+}

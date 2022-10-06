@@ -1,0 +1,9 @@
+.container{
+    min-width: 600px;
+    max-width: 50%;
+}
+
+.reigisterUser{
+    width:100%;
+    position:center;
+}

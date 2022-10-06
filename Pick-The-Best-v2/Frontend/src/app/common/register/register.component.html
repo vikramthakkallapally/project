@@ -1,0 +1,20 @@
+<div class="container mt-5 registerForm">
+    <div class="card" style="padding:20px;">
+        <form #registerForm="ngForm" (ngSubmit)="!registerForm.invalid && register(registerForm)">
+            <h3 class="label label-default text-primary mb-3">Register</h3>
+            <input type="text" ngModel name="userName" id="userName" placeholder="enter your username" class="form-control mb-3" required="required" minlength="5">
+            <div class="form-group row">
+                <div class="col-sm-6">
+                    <input type="text" ngModel name="userFirstName" id="userFirstName" placeholder="enter your First name" class="form-control mb-3" required="required" minlength="4">
+                </div>
+                <div class="col-sm-6">
+                    <input type="text" ngModel name="userLastName" id="userLastName" placeholder="enter your Last name" class="form-control mb-3" required="required" minlength="4">
+                </div>
+            </div>
+            <input type="email" ngModel name="email" id="email" placeholder="enter your email" class="form-control mb-3" required="required" minlength="6">
+            <input type="password" ngModel name="userPassword" id="userPassword" placeholder="enter password" class="form-control mb-3" required="required" minlength="8">
+            <input type="password" ngModel name="confirmPassword" id="confirmPassword" placeholder="Re-enter Password" class="form-control mb-3" required="required" minlength="8">
+            <input type="submit" value="Register" class="btn btn-primary form-control rounded-0">
+        </form>
+    </div>
+</div>

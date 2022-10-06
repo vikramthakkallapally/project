@@ -1,0 +1,13 @@
+.card{
+    min-width:500px;
+    max-width:70%;
+    position: center;
+}
+.container{
+    position: center;;
+}
+.card-header{
+    background-color:rgba(4, 104, 255, 0.778);
+    color:white;
+    padding-left: 15px;
+}

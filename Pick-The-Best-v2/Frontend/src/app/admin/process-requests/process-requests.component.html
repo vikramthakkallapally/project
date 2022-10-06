@@ -1,0 +1,47 @@
+<div class="container-fluid">
+    <p class="alert alert-danger" *ngIf="errorOccured === true">{{errorMessage}}</p>
+    <p class="alert alert-success" *ngIf="isUpdated === true">{{successMessage}}</p>
+    <form (ngSubmit)="fetchRequests()" #reportForm="ngForm">
+        <div class="form-group row">
+            <label class="col-form-label-lg col-sm-1 text-primary">Start date:</label>
+            <div class="col-sm-2">
+                <input [ngModel]="startDate | date:'yyyy-MM-dd'" (ngModelChange)="startDate = $event" type="date"
+                    name="startDate" class="form-control">
+            </div>
+            <label class="col-form-label-lg col-sm-1 text-primary">End date:</label>
+            <div class="col-sm-2">
+                <input [ngModel]="endDate | date:'yyyy-MM-dd'" (ngModelChange)="endDate = $event" type="date"
+                    name="endDate" class="form-control">
+            </div>
+            <div class="col-sm-2">
+                <button type="submit" class="btn btn-primary form-control">Fetch Requests</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="container-fluid">
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Request Id</th>
+                <th>User</th>
+                <th>Request Status</th>
+                <th>Request Date</th>
+                <th>Product Name</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+                <tr  *ngFor="let req of userRequests; index as i">
+                    <td>{{req.id}}</td>
+                    <td>{{req.username}}</td>
+                    <td *ngIf="req.requestStatus == 'N'">Open</td>
+                    <td *ngIf="req.requestStatus == 'Y'">Closed</td>
+                    <td>{{req.requestDate | date:'yyyy-MM-dd'}}</td>
+                    <td>{{req.productname}}</td>
+                    <td><button class = "btn btn-warning" (click)="closeRequest(req.id)">Close</button></td>
+                </tr>
+        </tbody>
+    </table>
+</div>

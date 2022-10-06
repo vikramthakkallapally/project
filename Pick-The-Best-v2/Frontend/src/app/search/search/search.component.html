@@ -1,0 +1,62 @@
+<div class="container-fluid">
+    <div class="searchTemplate">
+        <form (ngSubmit)="fecthLocalSearchResults(searchToken)">
+            <div class="input-group">
+                <input type="input" class="form-control rounded" placeholder="Search" [(ngModel)]="searchToken"
+                    name="searchToken" />
+                <button type="submit" class="btn btn-outline-primary">search</button>
+            </div>
+        </form>
+    </div>
+    <div class="customSpinner" *ngIf="showSpinner==true">
+        <div class="d-flex align-items-right">
+            <h5 class="text-primary">Please Wait while we fetching the data........ &nbsp;&nbsp;</h5>
+            <div class="spinner-border ml-auto text-primary" role="status" aria-hidden="true"></div>
+        </div>
+    </div>
+    <div class="container-fluid result-container" *ngIf="content==true">
+        <div *ngFor="let result of searchResults" class="card" style="width: 25rem;">
+            <div class="card-body">
+                <h5 class="card-title text-primary">{{result.description}}</h5>
+                <p>Hurray! Here you go</p>
+                <table class="table table-borderless">
+                    <tr>
+                        <td>Stroe</td>
+                        <td>Price</td>
+                        <td>Rating</td>
+                        <td>Quick Buy</td>
+                    </tr>
+                    <tr *ngFor="let it of result.itemDetails">
+                        <th class="text-primary">{{it.storeName}}</th>
+                        <td>{{it.price}}</td>
+                        <td>{{it.rating}}</td>
+                        <a *ngIf="it.url !=='N/A'" href={{it.url}} target="_blank">Visit Site</a>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- div to display if no user reports found -->
+
+<div *ngIf="isresultsFound == false" class="container">
+    <h2 class ="text-danger"> We are Sorry!</h2>
+    <h6>No matching results found for given search kindly try elevated search feature by <a routerLink="/elevatedSearch">clicking here </a></h6>
+    <br>
+    <h4>Please consider following favour to improve site performance</h4>
+    <ul>
+        <li>Request new request by <a routerLink="/user/request">clicking here</a></li>
+        <li>Kindly share your feedback by <a routerLink="/user/contactus">clicking here</a></li>
+        <li>Reqd more about us by <a routerLink="/user/about">clicking here</a></li>
+    </ul>
+</div>
+
+
+
+
+
+
+
+

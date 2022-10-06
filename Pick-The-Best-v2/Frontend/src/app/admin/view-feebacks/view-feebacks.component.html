@@ -1,0 +1,35 @@
+<div class="container-fluid mt-3">
+    <div class="container-fluid">
+        <p class="alert alert-danger" *ngIf="errorOccured === true">{{errorMessage}}</p>
+        <form (ngSubmit)="fetchFeedbacks()" #reportForm="ngForm">
+            <div class="form-group row">
+                <label class="col-form-label-lg col-sm-1 text-primary">Start date:</label>
+                <div class="col-sm-2">
+                    <input [ngModel]="startDate | date:'yyyy-MM-dd'" (ngModelChange)="startDate = $event" type="date"
+                        name="startDate" class="form-control">
+                </div>
+                <label class="col-form-label-lg col-sm-1 text-primary">End date:</label>
+                <div class="col-sm-2">
+                    <input [ngModel]="endDate | date:'yyyy-MM-dd'" (ngModelChange)="endDate = $event" type="date"
+                        name="endDate" class="form-control">
+                </div>
+                <div class="col-sm-2">
+                    <button type="submit" class="btn btn-primary form-control">Find Feedbacks</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="container mt-5">
+    <div *ngFor="let fbk of feedbacks">
+        <div class="card mt-5" >
+            <div class="card-header">
+                {{fbk.username}} &nbsp; &nbsp;{{fbk.email}}&nbsp;&nbsp;&nbsp;
+                {{fbk.feedbackDate |  date:'yyyy-MM-dd'}}
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">{{fbk.feedback}}</li>
+            </ul>
+          </div>
+    </div>
+</div>

@@ -1,0 +1,8 @@
+.registerForm{
+    min-width:50%;
+    width:600px;
+}
+
+.ng-invalid:not(form){
+    border:1px solid blue;
+}

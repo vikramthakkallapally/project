@@ -1,0 +1,11 @@
+<div class="container mt-5 registerForm">
+    <div class="card" style="padding:20px;">
+        <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
+            <h3 class="label label-default text-primary mb-3">User Login</h3>
+            <input type="text" ngModel name="userName" id="userName" placeholder="enter your username" class="form-control mb-3">
+            <input type="password" ngModel name="userPassword" id="userPassword" placeholder="enter password" class="form-control mb-3">
+            <input type="submit" value="Login" class="btn btn-primary form-control rounded-0">
+            <button class="btn btn-success form-control mt-3 reigisterUser" routerLink="/register">Register User</button>
+        </form>
+    </div>
+</div>
