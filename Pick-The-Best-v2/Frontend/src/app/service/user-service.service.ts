@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { UserAuthService } from './user-auth.service';
 import { environment } from 'src/environments/environment';
+import { OtpAuthRequest, UpdatePasswordRequest } from '../common/reset-password/reset-password.component';
 
 @Injectable({
   providedIn: 'root'
@@ -64,6 +65,19 @@ export class UserService {
 
     return isMatch;
 
+  }
+
+
+  public sendOtp(email:string){
+    return this.httpClient.get(this.PATH_OF_API + `/reset/sendotp?email=${email}`,{ headers: this.requestHeader })
+  }
+
+  public validateOtp(otpAuthRequest:OtpAuthRequest){
+    return this.httpClient.post(this.PATH_OF_API + `/reset/verifyOtp`,otpAuthRequest,{ headers: this.requestHeader })
+  }
+
+  public updatePassword(updtReq:UpdatePasswordRequest){
+    return this.httpClient.post(this.PATH_OF_API + `/reset/password`,updtReq,{ headers: this.requestHeader })
   }
 
 }

@@ -11,10 +11,10 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.price.comparision.ecom.bean.Item;
-import com.price.comparision.ecom.bean.SearchAudit;
-import com.price.comparision.ecom.bean.SearchStats;
 import com.price.comparision.ecom.constants.DatabaseConstants;
+import com.price.comparision.ecom.model.Item;
+import com.price.comparision.ecom.model.SearchAudit;
+import com.price.comparision.ecom.model.SearchStats;
 import com.price.comparision.ecom.repository.ItemRepository;
 import com.price.comparision.ecom.repository.SearchAuditRepository;
 

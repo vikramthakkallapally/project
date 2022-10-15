@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.price.comparision</groupId>
-	<artifactId>pick-the-best</artifactId>
+	<artifactId>ecom</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>ecom</name>
 	<description>Demo project for Spring Boot</description>
@@ -102,7 +102,28 @@
         	<groupId>org.springframework.boot</groupId>
         	<artifactId>spring-boot-starter-aop</artifactId>
     	</dependency>
+    	
+    	<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-mail</artifactId>
+		</dependency>
 		
+		<!-- Web Socket Dependencies-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-websocket</artifactId>
+		</dependency>
+		
+		<dependency>
+    		<groupId>org.springframework</groupId>
+    		<artifactId>spring-messaging</artifactId>
+		</dependency>
+		
+		<dependency>
+  			<groupId>org.springframework.security</groupId>
+  			<artifactId>spring-security-messaging</artifactId>
+		</dependency>
+
 	</dependencies>
 
 	<build>

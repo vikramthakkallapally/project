@@ -1,9 +1,45 @@
 .container{
-    min-width: 600px;
-    max-width: 50%;
+    min-width: 450px;
+    max-width: 30%;
 }
 
 .reigisterUser{
     width:100%;
     position:center;
 }
+
+.error1{
+    padding: 0px 10px 20px 10px;
+    background-color: none;
+    border:none;
+    color: #c92a2a;
+}
+
+.forgot-link{
+    text-decoration: none;
+    display: block;
+    margin-bottom: 10px;
+    text-align: center;
+    color: #339af0;
+}
+
+.forgot-link:link,
+.forgot-link:visited{
+    text-decoration: none;
+}
+.forgot-link:hover,
+.forgot-link:active{
+    text-decoration: none;
+}
+
+.cta-1{
+    background-color: #1971c2;
+    font-weight: bold;
+}
+
+input{
+    text-align: center;
+}
+
+
+

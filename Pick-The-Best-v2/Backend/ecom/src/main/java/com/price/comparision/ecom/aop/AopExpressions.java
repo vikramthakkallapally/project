@@ -18,5 +18,24 @@ public class AopExpressions {
 	public void forScheduledTasks() {
 	}
 	
+	@Pointcut("execution(* com..verifyOtp*(..))")
+    public void forVerifyOtp() {
+    }
 	
+	@Pointcut("execution(* com..reset*(..))")
+    public void resetPassword() {
+    }
+	
+	@Pointcut("execution(* com..register*(..))")
+    public void register() {
+    }
+	
+	@Pointcut("execution(* com..login*(..))")
+    public void login() {
+    }
+	
+	@Pointcut("execution(* com..getEncodedPassword*(..))")
+    public void getEncoded() {
+    }
+    
 }

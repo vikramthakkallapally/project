@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.price.comparision.ecom.bean.SearchStats;
+import com.price.comparision.ecom.model.SearchStats;
 import com.price.comparision.ecom.service.DatabaseService;
 
 

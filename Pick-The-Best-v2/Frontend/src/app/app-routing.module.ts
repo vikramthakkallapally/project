@@ -13,7 +13,9 @@ import { ErrorComponent } from './request/error/error.component';
 import { RequestComponent } from './request/request/request.component';
 import { ElevatedSearchComponent } from './search/elevated-search/elevated-search.component';
 import { SearchComponent } from './search/search/search.component';
+import { ResetPasswordComponent } from './common/reset-password/reset-password.component';
 import { AuthGuard } from './_auth/auth.guard';
+import { ChatComponent } from './common/chat/chat.component';
 
 const routes: Routes = [
   {path: 'user/search',component:SearchComponent,canActivate:[AuthGuard],data:{roles:['ADMIN','USER']}},
@@ -21,6 +23,7 @@ const routes: Routes = [
   {path: 'user/request',component:RequestComponent,canActivate:[AuthGuard],data:{roles:['ADMIN','USER']}},
   {path: 'user/contactus',component:ContactusComponent,canActivate:[AuthGuard],data:{roles:['ADMIN','USER']}},
   {path: 'user/about',component:AboutComponent,canActivate:[AuthGuard],data:{roles:['ADMIN','USER']}},
+  {path: 'reset/password',component:ResetPasswordComponent},
   {path: 'admin/addItems',component:AddItemsComponent,canActivate:[AuthGuard],data:{roles:['ADMIN']}},
   {path: 'admin/viewItems',component:ViewItemsComponent,canActivate:[AuthGuard],data:{roles:['ADMIN']}},
   {path: 'admin/viewRequests',component:ProcessRequestsComponent,canActivate:[AuthGuard],data:{roles:['ADMIN']}},
@@ -29,7 +32,8 @@ const routes: Routes = [
   {path: 'login',component:LoginComponent},
   {path: 'register',component:RegisterComponent},
   {path: 'forbidden',component:ErrorComponent},
-  {path: '**',component:SearchComponent,canActivate:[AuthGuard],data:{roles:['ADMIN','USER']}}
+  {path: 'common/chat',component:ChatComponent,canActivate:[AuthGuard],data:{roles:['ADMIN','USER']}},
+  {path: '**',component:SearchComponent,canActivate:[AuthGuard],data:{roles:['ADMIN','USER']}},
 
 ];
 

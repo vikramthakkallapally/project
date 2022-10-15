@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.price.comparision.ecom.bean.AdminStats;
-import com.price.comparision.ecom.bean.Contactus;
-import com.price.comparision.ecom.bean.Item;
-import com.price.comparision.ecom.bean.Request;
+import com.price.comparision.ecom.model.AdminStats;
+import com.price.comparision.ecom.model.Contactus;
+import com.price.comparision.ecom.model.Item;
+import com.price.comparision.ecom.model.Request;
 import com.price.comparision.ecom.service.AdminService;
 import com.price.comparision.ecom.service.DatabaseService;
 

@@ -1,185 +1,158 @@
 <div class="container-fluid">
     <div class="searchTemplate">
         <form (ngSubmit)="fetchResults()">
-            <div class="input-group pull-right">
-                <input type="input" class="form-control rounded" placeholder="Elevated Search" [(ngModel)]="searchToken"
+            <div class="input-group elevated-search-box">
+                    <input type="input" class="form-control rounded-left" placeholder="Elevated Search" [(ngModel)]="searchToken"
                     name="searchToken" />
-                <button type="submit" class="btn btn-outline-primary">search</button>
+                    <button type="submit" class="btn btn-primary">search</button>       
             </div>
         </form>
     </div>
 </div>
 <div class="customSpinner" *ngIf="showSpinner==true">
-    <div class="d-flex align-items-right">
-        <h5 class="text-primary">Please Wait while we fetching the data........ &nbsp;&nbsp;</h5>
+    <div class="d-flex align-items-right waiting-text">
+        <h5 class="text-primary ">Please Wait while we fetching the data........ &nbsp;&nbsp;</h5>
         <div class="spinner-border ml-auto text-primary" role="status" aria-hidden="true"></div>
     </div>
 </div>
 
-<div class="alertMessage" *ngIf="isErroroccred!=false">
+<div class="alertMessage" *ngIf="isErroroccred!=false" >
     <div class="alert alert-danger">{{errorMessage}}</div>
 </div>
 
 <div class="container-fluid">
-    <div class="col-sm-12">
-        <div class="row">
-            <div class="col-sm-3" *ngIf="amazonSearchitems.length > 0">
-                <h3 class="text-success">Amazon Results:</h3>
-                <div *ngFor="let amazon of amazonSearchitems" class="card amazonCard">
-                    <div class="storeName">
-                        <h5 class="text-success">{{amazon.store}}</h5>
+    <div class="mainContainer">
+        
+            <div *ngFor="let amazon of amazonSearchitems" class="card amazonCard" >
+                <div class="store-name amazon-storeName">
+                    <h5>{{amazon.store}}</h5>
+                </div>
+                <div class="card-body">
+                    <div class="imageBox" *ngIf="amazon.imageUrl !== 'N/A'">
+                        <img *ngIf="amazon.imageUrl != 'N/A'" class="images" src={{amazon.imageUrl}}/>
+                        <img *ngIf="amazon.imageUrl === 'N/A'" class="images" src="../../../assets/images/amazon.jpg">
                     </div>
-                    <div class="card-body">
-                        <div class="imageBox">
-                            <img class="images" src={{amazon.imageUrl}} alt="Image Not Avaialbe" />
-                        </div>
-                        <div class="">
-                            <div class="row">
-                                <div class="col">
-                                    <h6 class="text-success">Rating: </h6>
-                                </div>
-                                <div class="col">
-                                    <p style="color:black">{{amazon.rating}}</p>
-                                </div>
+                    <div class="rating rating-1">
+                        <div class="row">
+                            <div class="col">
+                                <p>Rating: </p>
+                            </div>
+                            <div class="col">
+                                <p>{{amazon.rating}}</p>
                             </div>
                         </div>
-                        <div class="price">
-                            <h5 class="text-success">Price: {{amazon.price}}</h5>
-                        </div>
-                        <div class="url">
-                            <a href={{amazon.url}} class="btn btn-success visitStore" stylr="float:right" role="button"
-                                target="_blank"> Visit Store</a>
-                        </div>
-                        <div class="productName">
-                            <h6 class="text-success">Description: </h6>
-                            <p>{{amazon.productName}}</p>
-                        </div>
+                    </div>
+                    <div class="price">
+                        <p>Price: <span class="price-1">{{amazon.price}}</span></p>
+                    </div>
+                    <div class="url">
+                        <a href={{amazon.url}} class="btn btn-success visitStore" stylr="float:right" role="button" target="_blank"> Visit on Amazon</a>
+                    </div>
+                    <div class="productName">
+                        <h6 class="text-success description">Description: </h6>
+                        <p class="product-description">{{amazon.productName}}</p>
                     </div>
                 </div>
             </div>
+        
+        
+        
+            <div *ngFor="let target of targetSearchitems" class="card targetCard">
+                <div class="store-name target-storeName">
+                    <h5>{{target.store}}</h5>
+                </div>
+                <div class="card-body">
+                    <div class="imageBox">
+                        <img *ngIf="target.imageUrl != 'N/A'" class="images" src={{target.imageUrl}}/>
+                        <img *ngIf="target.imageUrl === 'N/A'" class="images" src="../../../assets/images/target.png">
+                    </div>
+                    <div class="rating">
+                        <div class="row">
+                            <div class="col">
+                                <h6 class="text-success">Rating: </h6>
+                            </div>
+                            <div class="col rating-1">
+                                <p style="color:black">{{target.rating}}</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="price">
+                        <h5 class="text-success">Price: {{target.price}}</h5>
+                    </div>
+                    <div class="url">
+                        <a href={{target.url}} class="btn btn-success target-btn visitStore" stylr="float:right" role="button" target="_blank"> Visit Store</a>
+                    </div>
+                    <div class="productName">
+                        <h6 class="">Description: </h6>
+                        <p class="product-description">{{target.productName}}</p>
+                    </div>
+                </div>
+            </div>
+        
 
-            <div class="col-sm-3" *ngIf="targetSearchitems.length > 0">
-                <h3 class="text-success">Target Results:</h3>
-                <div *ngFor="let target of targetSearchitems" class="card targetCard">
-                    <div class="storeName">
-                        <h5 class="text-success">{{target.store}}</h5>
+        
+            <div *ngFor="let costco of costcoSearchitems" class="card costcoCard">
+                <div class="store-name costco-storeName">
+                    <h5>{{costco.store}}</h5>
+                </div>
+                <div class="card-body">
+                    <div class="imageBox">
+                        <img *ngIf="costco.imageUrl != 'N/A'" class="images" src={{costco.imageUrl}}/>
+                        <img *ngIf="costco.imageUrl === 'N/A'" class="images" src="../../../assets/images/costco.png">
                     </div>
-                    <div class="card-body">
-                        <div class="imageBox" style="height:250px">
-                            <img *ngIf="target.imageUrl != 'N/A'" class="images" src={{target.imageUrl}}
-                                alt="Image Not Avaialbe" />
-                            <div *ngIf="target.imageUrl === 'N/A'">
-                                <h2>We are Sorry!</h2>
-                                <h3>Image Not Avaialbe</h3>
-                                <h4>Visit Store to have a glance</h4>
+                    <div class="rating rating-1">
+                        <div class="row">
+                            <div class="col">
+                                <h6 class="text-success">Rating: </h6>
+                            </div>
+                            <div class="col">
+                                <p style="color:black">{{costco.rating}}</p>
                             </div>
                         </div>
-                        <div class="rating">
-                            <div class="row">
-                                <div class="col">
-                                    <h6 class="text-success">Rating: </h6>
-                                </div>
-                                <div class="col">
-                                    <p style="color:black">{{target.rating}}</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="price">
-                            <h5 class="text-success">Price: {{target.price}}</h5>
-                        </div>
-                        <div class="url">
-                            <a href={{target.url}} class="btn btn-success visitStore" stylr="float:right" role="button"
-                                target="_blank"> Visit Store</a>
-                        </div>
-                        <div class="productName">
-                            <h6 class="text-success">Description: </h6>
-                            <p>{{target.productName}}</p>
-                        </div>
+                    </div>
+                    <div class="price">
+                        <h5 class="text-success">Price: {{costco.price}}</h5>
+                    </div>
+                    <div class="url">
+                        <a href={{costco.url}} class="btn btn-success visitStore costco-btn" stylr="float:right" role="button" target="_blank"> Visit Store</a>
+                    </div>
+                    <div class="productName">
+                        <h6 class="text-success">Description: </h6>
+                        <p class="product-description">{{costco.productName}}</p>
                     </div>
                 </div>
             </div>
-
-            <div class="col-sm-3" *ngIf="costcoSearchitems.length > 0">
-                <h3 class="text-success">Costco Results:</h3>
-                <div *ngFor="let costco of costcoSearchitems" class="card costcoCard">
-                    <div class="storeName">
-                        <h5 class="text-success">{{costco.store}}</h5>
+        
+        
+            <div *ngFor="let kroger of krogerSearchitems" class="card costcoCard">
+                <div class="store-name kroger-storeName">
+                    <h5>{{kroger.store}}</h5>
+                </div>
+                <div class="card-body">
+                    <div class="imageBox">
+                        <img *ngIf="kroger.imageUrl != 'N/A'" class="images" src={{kroger.imageUrl}}/>
+                        <img *ngIf="kroger.imageUrl === 'N/A'" class="images" src="../../../assets/images/kroger.jfif">
                     </div>
-                    <div class="card-body">
-                        <div class="imageBox" style="height:250px">
-                            <img *ngIf="costco.imageUrl != 'N/A'" class="images" src={{costco.imageUrl}}
-                                alt="Image Not Avaialbe" />
-                            <div *ngIf="costco.imageUrl === 'N/A'">
-                                <h2>We are Sorry!</h2>
-                                <h3>Image Not Avaialbe</h3>
-                                <h4>Visit Store to have a glance</h4>
+                    <div class="rating rating-1">
+                        <div class="row">
+                            <div class="col">
+                                <h6 class="text-success">Rating: </h6>
+                            </div>
+                            <div class="col">
+                                <p style="color:black">{{kroger.rating}}</p>
                             </div>
                         </div>
-                        <div class="rating">
-                            <div class="row">
-                                <div class="col">
-                                    <h6 class="text-success">Rating: </h6>
-                                </div>
-                                <div class="col">
-                                    <p style="color:black">{{costco.rating}}</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="price">
-                            <h5 class="text-success">Price: {{costco.price}}</h5>
-                        </div>
-                        <div class="url">
-                            <a href={{costco.url}} class="btn btn-success visitStore" stylr="float:right" role="button"
-                                target="_blank"> Visit Store</a>
-                        </div>
-                        <div class="productName">
-                            <h6 class="text-success">Description: </h6>
-                            <p>{{costco.productName}}</p>
-                        </div>
+                    </div>
+                    <div class="price">
+                        <h5 class="text-success">Price: {{kroger.price}}</h5>
+                    </div>
+                    <div class="url">
+                        <a href={{kroger.url}} class="btn btn-success visitStore kroger-btn" stylr="float:right" role="button" target="_blank"> Visit Store</a>
+                    </div>
+                    <div class="productName">
+                        <h6 class="text-success">Description: </h6>
+                        <p class="product-description">{{kroger.productName}}</p>
                     </div>
                 </div>
-            </div>
-            <div class="col-sm-3" *ngIf="krogerSearchitems.length > 0">
-                <h3 class="text-success">Kroger Results:</h3>
-                <div *ngFor="let kroger of krogerSearchitems" class="card costcoCard">
-                    <div class="storeName">
-                        <h5 class="text-success">{{kroger.store}}</h5>
-                    </div>
-                    <div class="card-body">
-                        <div class="imageBox" style="height:250px">
-                            <img *ngIf="kroger.imageUrl != 'N/A'" class="images" src={{kroger.imageUrl}}
-                                alt="Image Not Avaialbe" />
-                            <div *ngIf="kroger.imageUrl === 'N/A'">
-                                <h2>We are Sorry!</h2>
-                                <h3>Image Not Avaialbe</h3>
-                                <h4>Visit Store to have a glance</h4>
-                            </div>
-                        </div>
-                        <div class="rating">
-                            <div class="row">
-                                <div class="col">
-                                    <h6 class="text-success">Rating: </h6>
-                                </div>
-                                <div class="col">
-                                    <p style="color:black">{{kroger.rating}}</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="price">
-                            <h5 class="text-success">Price: {{kroger.price}}</h5>
-                        </div>
-                        <div class="url">
-                            <a href={{kroger.url}} class="btn btn-success visitStore" stylr="float:right" role="button"
-                                target="_blank"> Visit Store</a>
-                        </div>
-                        <div class="productName">
-                            <h6 class="text-success">Description: </h6>
-                            <p>{{kroger.productName}}</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
+            
 </div>

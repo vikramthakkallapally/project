@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.price.comparision.ecom.bean.Item;
-import com.price.comparision.ecom.bean.ProductDetails;
+import com.price.comparision.ecom.model.Item;
+import com.price.comparision.ecom.model.ProductDetails;
 import com.price.comparision.ecom.service.DatabaseService;
 import com.price.comparision.ecom.service.ProductDetailService;
 

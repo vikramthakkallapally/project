@@ -11,15 +11,15 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-import com.price.comparision.ecom.bean.GlobalSearchItem;
-import com.price.comparision.ecom.bean.ItemDetail;
 import com.price.comparision.ecom.config.DriverFactory;
 import com.price.comparision.ecom.constants.BusinessConstants;
 import com.price.comparision.ecom.constants.DatabaseConstants;
+import com.price.comparision.ecom.model.GlobalSearchItem;
+import com.price.comparision.ecom.model.ItemDetail;
 
-@Component
+@Service
 public class CostcoInterfaceImpl implements CostcoInterface {
 	
 	@Value("${costco.url}")
@@ -39,6 +39,7 @@ public class CostcoInterfaceImpl implements CostcoInterface {
 	public ItemDetail getItemInfo(String id,int retry) {
 		
 		ChromeDriver driver = DriverFactory.getInstance().getDriver();
+		
 		try {
 
 			String url = uri.replace("replaceIdHere", id);
@@ -51,7 +52,22 @@ public class CostcoInterfaceImpl implements CostcoInterface {
 				detail.setUrl(url);
 				try {
 					driver.get(url);
-					final List<WebElement> words = driver.findElementsById("pull-right-price");
+					List<WebElement> words = new ArrayList<WebElement>();
+					boolean isPriceFound = false;
+					
+					while (retryAttempts < 10000 && !isPriceFound) {
+					
+						words = driver.findElementsByXPath("//*[contains(@Id, 'pull-right-price')]");
+					
+						if(words.size() > 0) {
+							if(!words.get(0).getText().contains("-"))
+								isPriceFound = true;
+						}
+						
+						if(retryAttempts % 2000 == 0)
+							driver.navigate().refresh();
+						retryAttempts++;
+					}
 					
 					for (WebElement w : words) {
 						detail.setPrice(w.getText().replace("\n", ""));
@@ -59,11 +75,10 @@ public class CostcoInterfaceImpl implements CostcoInterface {
 					
 					if(detail.getPrice() != BusinessConstants.NOT_AVAILABLE) {
 						return detail;
-					}else if(retry < retryAttempts){
-						return getItemInfo(id,++retry);
-					}	
+					}
 				}catch(Exception e) {
 					//add custom logger here
+					e.printStackTrace();
 				}
 			}	
 			return detail;

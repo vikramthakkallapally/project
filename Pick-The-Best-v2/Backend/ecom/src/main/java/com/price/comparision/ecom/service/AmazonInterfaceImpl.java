@@ -8,19 +8,19 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
 import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.price.comparision.ecom.bean.GlobalSearchItem;
-import com.price.comparision.ecom.bean.ItemDetail;
 import com.price.comparision.ecom.config.DriverFactory;
 import com.price.comparision.ecom.constants.BusinessConstants;
 import com.price.comparision.ecom.constants.DatabaseConstants;
+import com.price.comparision.ecom.model.GlobalSearchItem;
+import com.price.comparision.ecom.model.ItemDetail;
 
-@Component
+@Service
 public class AmazonInterfaceImpl implements AmazonInterface {
 
 	@Value("${amazon.url}")
@@ -62,8 +62,10 @@ public class AmazonInterfaceImpl implements AmazonInterface {
 
 				HtmlPage page = client.getPage(url);
 
-				List<HtmlElement> list = page.getByXPath("//*[contains(@class, 'apexPriceToPay')]");
-
+				List<HtmlElement> list = page.getByXPath("//*[contains(@class, 'priceToPay')]");
+				
+				if(list.isEmpty())
+				    list = page.getByXPath("//*[contains(@class, 'apexPriceToPay')]");
 				for (HtmlElement h : list) {
 					detail.setPrice(h.getFirstChild().getTextContent());
 				}
@@ -192,7 +194,7 @@ public class AmazonInterfaceImpl implements AmazonInterface {
 			}			
 			return amazonItems;
 		}catch(Exception Ex) {
-			//add custome logging and exception
+			//add customer logging and exception
 		}finally {
 			driver.close();
 		}

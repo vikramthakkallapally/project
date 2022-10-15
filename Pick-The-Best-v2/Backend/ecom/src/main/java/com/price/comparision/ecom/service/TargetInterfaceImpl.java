@@ -9,15 +9,15 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-import com.price.comparision.ecom.bean.GlobalSearchItem;
-import com.price.comparision.ecom.bean.ItemDetail;
 import com.price.comparision.ecom.config.DriverFactory;
 import com.price.comparision.ecom.constants.BusinessConstants;
 import com.price.comparision.ecom.constants.DatabaseConstants;
+import com.price.comparision.ecom.model.GlobalSearchItem;
+import com.price.comparision.ecom.model.ItemDetail;
 
-@Component
+@Service
 public class TargetInterfaceImpl implements TargetInterface {
 
 	@Value("${target.url}")
@@ -47,16 +47,45 @@ public class TargetInterfaceImpl implements TargetInterface {
 				detail.setUrl(url);
 				try {
 					driver.get(url);
-					List<WebElement> words = driver.findElementsByXPath("//*[contains(@class, 'style__PriceFontSize')]");
+					
+					JavascriptExecutor js = (JavascriptExecutor) driver;
+					Long height = (Long) js.executeScript("return document.documentElement.scrollHeight");
+					Integer tmp = 250;
 
-					while (words.isEmpty() || retryAttempts < 10) {
+					while (height > 0) {
+						try{
+							String scroller = String.format("window.scrollTo(0, %d)", tmp);
+							((JavascriptExecutor) driver).executeScript(scroller);
+							tmp += 250;
+							height -= 250;
+							try {
+								Thread.sleep(1000);
+							} catch (InterruptedException e) {
+								// Custom Logging and Exception Handling
+							}
+						}catch(Exception ex) {
+							//add custom logging and exception handling
+						}
+					}
+					
+					List<WebElement> words = driver.findElementsByXPath("//*[contains(@class, 'h-text-sm h-text-grayDark')]");
+
+					if(words.isEmpty())
 						words = driver.findElementsByXPath("//*[contains(@class, 'style__PriceFontSize')]");
+						
+								 
+					while (retryAttempts < 10000) {
+						words = driver.findElementsByXPath("//*[contains(@class, 'style__PriceFontSize')]");
+						if(words.isEmpty())
+							words = driver.findElementsByXPath("//*[contains(@class, 'h-text-sm h-text-grayDark')]");
+						if(words.isEmpty())
+							words = driver.findElementsByXPath("//*[contains(@class, 'styles__CurrentPriceFontSize')]");
 						retryAttempts++;
 					}
-					detail.setPrice(words.get(0).getText());
+					detail.setPrice(words.get(0).getText().replace("Retail price: ", ""));
 
-					words = driver.findElementsByXPath("//*[contains(@class, 'utils__ScreenReaderOnly')]");
-					while (words.isEmpty() || retryAttempts < 10) {
+					words = driver.findElementsByXPath("//*[contains(@class, 'utils__ScreenReaderOnly')  ]");
+					while (words.isEmpty() && retryAttempts < 10) {
 						words = driver.findElementsByXPath("//*[contains(@class, 'utils__ScreenReaderOnly')]");
 						retryAttempts++;
 					}

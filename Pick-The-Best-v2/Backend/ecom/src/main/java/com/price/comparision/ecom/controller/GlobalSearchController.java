@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.price.comparision.ecom.bean.GlobalSearchDetails;
-import com.price.comparision.ecom.bean.GlobalSearchItem;
+import com.price.comparision.ecom.model.GlobalSearchDetails;
+import com.price.comparision.ecom.model.GlobalSearchItem;
 import com.price.comparision.ecom.service.ProductDetailService;
 
 @RestController

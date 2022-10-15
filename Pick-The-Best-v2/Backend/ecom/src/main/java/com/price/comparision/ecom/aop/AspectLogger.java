@@ -19,7 +19,13 @@ public class AspectLogger {
 	
 	private Logger myLogger = Logger.getLogger(AspectLogger.class.getName());
 	
-	@Around("com.price.comparision.ecom.aop.AopExpressions.forController()")
+	@Around("com.price.comparision.ecom.aop.AopExpressions.forController() "
+	        + "&& "
+	        + "!com.price.comparision.ecom.aop.AopExpressions.forVerifyOtp() "
+	        + "&& !com.price.comparision.ecom.aop.AopExpressions.resetPassword() "
+	        + "&& !com.price.comparision.ecom.aop.AopExpressions.register() && "
+	        + "!com.price.comparision.ecom.aop.AopExpressions.login()"
+	        + "!com.price.comparision.ecom.aop.AopExpressions.getEncoded()")
 	public Object aroundController(ProceedingJoinPoint joinpoint) throws Throwable{
 		
 		String method = joinpoint.getSignature().toShortString();
@@ -34,7 +40,13 @@ public class AspectLogger {
 	}
 	
 	
-	@Around("com.price.comparision.ecom.aop.AopExpressions.forService()")
+	@Around("com.price.comparision.ecom.aop.AopExpressions.forService()"
+	        + "&& "
+            + "!com.price.comparision.ecom.aop.AopExpressions.forVerifyOtp() "
+            + "&& !com.price.comparision.ecom.aop.AopExpressions.resetPassword() "
+            + "&& !com.price.comparision.ecom.aop.AopExpressions.register() && "
+            + "!com.price.comparision.ecom.aop.AopExpressions.login()"
+            + "!com.price.comparision.ecom.aop.AopExpressions.getEncoded()")
 	public Object aroundService(ProceedingJoinPoint joinpoint) throws Throwable{
 		
 		String method = joinpoint.getSignature().toShortString();
@@ -49,7 +61,13 @@ public class AspectLogger {
 		return result;
 	}
 	
-	@Before("com.price.comparision.ecom.aop.AopExpressions.forScheduledTasks()")
+	@Before("com.price.comparision.ecom.aop.AopExpressions.forScheduledTasks()"
+	        + "&& "
+            + "!com.price.comparision.ecom.aop.AopExpressions.forVerifyOtp() "
+            + "&& !com.price.comparision.ecom.aop.AopExpressions.resetPassword() "
+            + "&& !com.price.comparision.ecom.aop.AopExpressions.register() && "
+            + "!com.price.comparision.ecom.aop.AopExpressions.login()"
+            + "!com.price.comparision.ecom.aop.AopExpressions.getEncoded()")
 	public void beforeAddAccountAdvice(JoinPoint joinpoint) {
 		myLogger.info(" ---> Execution @Before advice on executing Task()");
 		

@@ -12,9 +12,9 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.price.comparision.ecom.bean.JwtRequest;
-import com.price.comparision.ecom.bean.JwtResponse;
-import com.price.comparision.ecom.bean.User;
+import com.price.comparision.ecom.model.JwtRequest;
+import com.price.comparision.ecom.model.JwtResponse;
+import com.price.comparision.ecom.model.User;
 import com.price.comparision.ecom.repository.UserDao;
 import com.price.comparision.ecom.util.JwtUtil;
 
@@ -62,9 +62,9 @@ public class JwtService implements UserDetailsService{
 		}
 	}
 	
-	private Set getAuthorities(User user) {
+	private Set<SimpleGrantedAuthority> getAuthorities(User user) {
 		
-		Set authorities = new HashSet();
+		Set<SimpleGrantedAuthority> authorities = new HashSet<SimpleGrantedAuthority>();
 		user.getRoles().forEach(role  -> {
 			authorities.add(new SimpleGrantedAuthority("ROLE_"+role.getRoleName()));
 			}

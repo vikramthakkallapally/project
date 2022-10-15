@@ -22,9 +22,8 @@ import { AuthGuard } from './_auth/auth.guard';
 import { AuthInterceptor } from './_auth/auth.intercepter';
 import { RegisterComponent } from './common/register/register.component';
 import { UserService } from './service/user-service.service';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { SharedModule } from './shared.module';
-import { ToastrModule } from 'ngx-toastr';
+import { ResetPasswordComponent } from './common/reset-password/reset-password.component';
+import { ChatComponent } from './common/chat/chat.component';
 
 
 @NgModule({
@@ -43,17 +42,16 @@ import { ToastrModule } from 'ngx-toastr';
     ViewItemsComponent,
     ViewFeebacksComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    ResetPasswordComponent,
+    ChatComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ToastrModule.forRoot(),
     NgbModule,
     HttpClientModule,
-    FormsModule,
-    BrowserAnimationsModule,
-    SharedModule
+    FormsModule
   ],
   providers: [
     AuthGuard,{

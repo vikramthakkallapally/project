@@ -48,4 +48,22 @@ export class HeaderComponent implements OnInit {
     return this.userService.isStandardUser()
   }
 
+  public enableNavigation(){
+   
+    let elements: HTMLCollectionOf<HTMLUListElement> = document.getElementsByTagName("ul")
+
+    console.log(elements)
+    for(var i = 0; i< elements.length; i++){
+      elements[i].removeAttribute('display')
+    }
+  }
+
+  public disable(){
+    let elements: HTMLCollectionOf<HTMLUListElement> = document.getElementsByTagName("ul")
+
+    for(var i = 0; i< elements.length; i++){
+      elements[i].classList.add('hide')
+    }
+  }
+
 }

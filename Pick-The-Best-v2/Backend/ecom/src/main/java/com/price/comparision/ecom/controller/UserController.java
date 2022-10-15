@@ -2,25 +2,29 @@ package com.price.comparision.ecom.controller;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.price.comparision.ecom.bean.User;
-import com.price.comparision.ecom.service.UserService;
+import com.price.comparision.ecom.model.EmailAuthRequest;
+import com.price.comparision.ecom.model.UpdatePasswordRequest;
+import com.price.comparision.ecom.model.User;
+import com.price.comparision.ecom.service.UserServiceImpl;
 
 
 @RestController
 public class UserController {
 	
 	@Autowired
-	private UserService userService;
+	private UserServiceImpl userService;
 	
 	@PostMapping({"/user/registerNewUser"})
 	public User registerNewUser(@RequestBody User user) {
-		System.out.println(user);
 		return userService.registerNewUser(user);
 	}
 	
@@ -42,5 +46,34 @@ public class UserController {
 		return "This URL ia accessible only to User";
 	}
 	
+	@GetMapping({"/reset/sendotp"})
+	public ResponseEntity<Void> sendOtp(@RequestParam String email) {
+		try {
+			userService.sendOtp(email);
+			return ResponseEntity.status(HttpStatus.OK).build();
+		}catch(Exception ex) {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+		}
+	}
+	
+	@PostMapping({"/reset/verifyOtp"})
+	public ResponseEntity<Void> verifyOtp(@RequestBody EmailAuthRequest otpAuthRequest) {
+		if(userService.verifyOtp(otpAuthRequest)) {
+			return ResponseEntity.status(HttpStatus.OK).build();
+		}else {
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+		}
+		
+	}
+	
+	@PostMapping("/reset/password")
+	public ResponseEntity<Void> updatePassword(@RequestBody UpdatePasswordRequest updatePassword) {
+		
+		if(userService.updatePassword(updatePassword))
+			return ResponseEntity.status(HttpStatus.OK).build();
+		else
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+		
+	}
 
 }

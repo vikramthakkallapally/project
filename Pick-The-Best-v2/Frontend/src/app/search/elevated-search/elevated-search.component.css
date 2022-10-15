@@ -1,6 +1,6 @@
 .searchTemplate{
     width: 100%;
-    border-bottom: 2px solid rgb(69, 99, 249);
+    border-bottom: 2px solid #a5d8ff;
     padding: 10px 10px 10px 10px;
     height:60px;
 }
@@ -27,63 +27,275 @@
 }
 
 .mainContainer{
-    display:flex;
-    overflow: row;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    align-content: space-around;
+    justify-content: space-between;
+    padding-bottom: 50px !important;
 }
 
-.subcontainer{
-    overflow:row;
-    padding:10px 10px 10px 10px;
-    margin-left:1%;
-    margin-right:1%;
-    border-radius: 5px;
-    width: 23%;
-    min-width:350px;
-}
-.amazonCard{
-    border: 1px solid green;
-}
-
-.targetCard{
-    border: 1px solid rgb(179, 72, 72);
-    border-width:thin;
-}
-
-.krogerCard{
-    border: 1px solid blue;
-    border-width: thin;
-}
-
-.costcoCard{
-    border: 1px solid Red;
-    border-width: thin;
-}
 
 .card{
-    height: 600px;
     width:auto;
     padding:10px 10px 10px 10px;
     margin-bottom: 25px;
     margin-top:20px;
+    overflow-x: auto;
+    width: 280px;
+    background-color: #f8f9fa;
+
+    margin-right: auto;
+    margin-left: auto;
 }
 .imageBox{
     margin-bottom: 10px;
 }
 
 .imageBox img{
-    max-width:100%;
-    height:250px;
-    float:center;
+    height:120px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 
 .visitStore{
     width:100%;
-    font-size:18px;
+    font-size:16px;
     margin-top:10px;
     margin-bottom:10px;
+}
+
+.elevated-search-box{
+    float: right;
+}
+
+.amazon-storeName{
+    color: #2f9e44;
+}
+
+.target-storeName{
+    color: #c92a2a;
+}
+
+.price{
+    font-size: 14px;
+}
+
+.price-1{
+    font-size: 16px;
+}
+
+.description{
+    font-size: 16px;
+}
+
+.rating{
+    font-size: 14px;
+    padding-top: 15px;;
+}
+.product-description{
+    font-size: 14px;
+}
+
+.target-btn:visited,
+.target-btn:link{
+    background-color: #c92a2a;
+}
+
+.costco-storeName{
+    color:#c92a2a;
+}
+
+.target-btn:visited,
+.target-btn:link{
+    background-color: #c92a2a;
+    border: none;
+}
+
+.costco-btn:visited,
+.costco-btn:link{
+    background-color: #c92a2a;
+    border: none;
+}
+
+.kroger-storeName{
+    color: #1971c2;
+}
+
+.kroger-btn:visited,
+.kroger-btn:link{
+    background-color: #1971c2;
 }
 
 
 
 
+@media (max-width: 2600px) {
+    .mainContainer{
+        grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+    }
+  }
+@media (max-width: 2100px) {
+.mainContainer{
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+}
+  
+@media (max-width: 1800px) {
+    .mainContainer{
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+    }    
+}
+
+@media (max-width: 1350px) {
+    .mainContainer{
+        grid-template-columns: 1fr 1fr 1fr;
+    }    
+}
+
+@media (max-width: 850px) {
+    .mainContainer{
+        grid-template-columns: 1fr 1fr;
+    } 
+    
+    .card{
+        width:280px !important;
+    }
+}
+
+@media (max-width: 800px) {
+    .mainContainer{
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .card{
+        width: 320px !important
+    }
+}
+
+@media (max-width: 750px) {
+    .mainContainer{
+        grid-template-columns: 1fr 1fr;
+    }  
+    
+    .card{
+        width: 300px !important
+    }
+}
+
+@media (max-width: 600px) {
+    .mainContainer{
+        grid-template-columns: 1fr 1fr;
+    }    
+
+    .input-group{
+        width:100%
+    }
+
+    .card{
+        width: 230px !important;
+    }
+
+    .store-name h5{
+        font-size: 14px !important;
+    }
+
+    .imageBox img{
+        height:90px;
+    }
+
+    .product-description{
+        font-size: 10px !important;
+    }
+
+    .price h5,
+    .price .text-success
+    .price p,
+    .price-1{   
+        font-size: 12px !important;
+    }
+
+    .waiting-text h5{
+        font-size: 12px !important;
+    }
+    
+    .rating-1 p{
+        font-size: 10px !important;
+    }
+
+    .visitStore{
+        width:100%;
+        font-size:12px;
+        margin-top:5px;
+        margin-bottom:10px;
+    }
+
+    .productName h6{
+        font-size: 14px !important;
+    }
+}
+
+
+@media (max-width: 490px) {
+    .card{
+        width: 200px !important;
+    }
+
+    .product-description{
+        font-size: 8px !important;
+    }
+
+    .input-group{
+        width:100%;
+    }
+
+    .visitStore{
+        font-size:10px;
+        margin-top:5px;
+        margin-bottom:10px;
+    }
+
+    .imageBox img{
+        height:60px;
+    }
+
+    .productName h6{
+        font-size: 12px !important;
+    }
+}
+
+@media (max-width: 440px) {
+    .card{
+        width: 180px !important;
+    }
+}
+
+@media (max-width: 420px) {
+    .mainContainer{
+        grid-template-columns: 1fr;
+        padding-right: auto;
+        padding-left:auto;
+        padding: 0 0 ;
+    }    
+
+    
+
+    .card{
+        width:auto;
+        margin-right: auto;
+        margin-left: auto;
+        margin-bottom: 25px;
+        margin-top:20px;
+        overflow-x: auto;
+        width: 240px;
+        background-color: #f8f9fa;
+    }
+
+    .customSpinner{
+        margin-top:10px;
+        margin-left:10px
+    }
+
+
+}

@@ -8,9 +8,9 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
-import com.price.comparision.ecom.bean.Item;
-import com.price.comparision.ecom.bean.SearchAudit;
-import com.price.comparision.ecom.bean.SearchStats;
+import com.price.comparision.ecom.model.Item;
+import com.price.comparision.ecom.model.SearchAudit;
+import com.price.comparision.ecom.model.SearchStats;
 
 @Repository
 public interface SearchAuditRepository extends CrudRepository<SearchAudit,Long> {
@@ -27,7 +27,7 @@ public interface SearchAuditRepository extends CrudRepository<SearchAudit,Long> 
 	@Query("update SearchAudit set searchCount = searchCount-1 where searchDate= :date and searchToken = :searchToken")
 	void decreaseSearchTokenCount(Date date,String searchToken);
 	
-	@Query("select new com.price.comparision.ecom.bean.SearchStats(searchToken, sum(searchCount)) from SearchAudit where searchDate between :startDate and :endDate group by searchToken order by sum(searchCount) desc")
+	@Query("select new com.price.comparision.ecom.model.SearchStats(searchToken, sum(searchCount)) from SearchAudit where searchDate between :startDate and :endDate group by searchToken order by sum(searchCount) desc")
 	List<SearchStats> getStats(Date startDate, Date endDate);
 	
 }

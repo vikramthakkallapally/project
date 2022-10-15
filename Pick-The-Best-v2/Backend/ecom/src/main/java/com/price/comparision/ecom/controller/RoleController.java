@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.price.comparision.ecom.bean.Role;
+import com.price.comparision.ecom.model.Role;
 import com.price.comparision.ecom.service.RoleService;
 
 

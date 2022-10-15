@@ -1,0 +1,51 @@
+<div class="container message-container" [hidden]="!isAdmin && !isChatOpen">
+    <div class="messages-div"  #scrollMe  [scrollTop]="scrollMe.scrollHeight" id="message-div">
+        <div *ngFor="let msg of messages">
+            <div class="inner-message-div">
+                <p  class="message-text" 
+                [ngClass]="{'outbound-msg':msg.sender === sender, 
+                    'inbound-msg':msg.sender !== sender, 
+                    'last-message':msg === messages[messages.length-1] }">
+                    {{msg.message}}
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="chat-div">
+        <textarea name = "message" 
+            (keyup.enter)="sendMessage()" maxlength="10" minlength="1"
+            id = "message" class="message-text-input" [(ngModel)] = "message.message" [disabled]="isAdmin && this.messages.length == 0">
+        </textarea>
+
+        <div class="btn-div">
+            <button class="btn sent-btn" id="send-btn" (click)="sendMessage()" [disabled]="(this.message.message.trim().length == 0 )">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="#1971c2" class="ionicon" viewBox="0 0 512 512"><title>Send</title><path d="M16 464l480-208L16 48v160l320 48-320 48z"/></svg>
+            </button>
+            <button class="btn close-btn" id="send-btn" (click)="finishChat()">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="#f03e3e" class="ionicon" viewBox="0 0 512 512"><title>Close Circle</title><path d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192 192-86 192-192z" fill="none" stroke="currentColor" stroke-miterlimit="10" stroke-width="32"/><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="32" d="M320 320L192 192M192 320l128-128"/></svg>
+            </button>
+            <button class="btn btn-danger" id="send-btn" (click)="closeChat()" [hidden]="!isAdmin">
+                finish
+            </button>
+        </div>
+    </div>
+</div>
+
+
+
+<div [hidden]="!noAdminFound" class="container text-container">
+    <p>Thanks for connecting to live chat</p>
+    <P>No admin Available</P>
+    <P>Kindly try after some time</P>
+</div>
+
+<script>
+    input.addEventListener("message", function(event) {
+        if (event.key === "Enter") {
+            event.preventDefault();
+            document.getElementById("send-btn").click();
+        }
+    });
+</script>
+

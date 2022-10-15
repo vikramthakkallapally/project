@@ -4,8 +4,8 @@ import java.util.List;
 
 import org.springframework.stereotype.Service;
 
-import com.price.comparision.ecom.bean.GlobalSearchItem;
-import com.price.comparision.ecom.bean.ItemDetail;
+import com.price.comparision.ecom.model.GlobalSearchItem;
+import com.price.comparision.ecom.model.ItemDetail;
 
 @Service
 public interface CostcoInterface {

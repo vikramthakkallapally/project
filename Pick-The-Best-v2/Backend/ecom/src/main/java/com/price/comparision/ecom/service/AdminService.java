@@ -8,9 +8,9 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.price.comparision.ecom.bean.AdminStats;
-import com.price.comparision.ecom.bean.Contactus;
-import com.price.comparision.ecom.bean.Request;
+import com.price.comparision.ecom.model.AdminStats;
+import com.price.comparision.ecom.model.Contactus;
+import com.price.comparision.ecom.model.Request;
 import com.price.comparision.ecom.repository.ContactusRepository;
 import com.price.comparision.ecom.repository.RequestRepository;
 

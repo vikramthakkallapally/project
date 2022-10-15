@@ -1,8 +1,6 @@
 package com.price.comparision.ecom.constants;
 
-import org.springframework.stereotype.Component;
 
-@Component
 public class CacheConstants {
 	
 	public static final Integer localCacheHeapSize = 1000;

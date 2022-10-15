@@ -1,0 +1,28 @@
+.form-group{
+    margin: 10px 10px 10px 10px;
+    width:600px;
+    float:center;
+}
+
+.btn{
+    width:600px;
+    margin:10px 10px 10px 10px;
+}
+
+.container{
+    margin-top: 50px;
+    align-items:center;
+}
+
+h3{
+    margin:10px 10px 10px 10px;
+}
+label{
+    font-size: 16px;
+    padding-bottom: 5px;;
+}
+
+p{
+    font-size: 14px;
+    padding-top: 5px;
+}

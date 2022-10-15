@@ -3,7 +3,7 @@ package com.price.comparision.ecom.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.price.comparision.ecom.bean.Role;
+import com.price.comparision.ecom.model.Role;
 import com.price.comparision.ecom.repository.RoleDao;
 
 

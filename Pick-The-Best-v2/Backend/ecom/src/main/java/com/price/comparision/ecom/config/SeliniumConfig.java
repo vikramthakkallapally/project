@@ -12,12 +12,11 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class SeliniumConfig {
-	
+    
 	@PostConstruct
 	void PostConstruct() {
-		System.setProperty("webdriver.chrome.driver", "C:\\ECom\\Pick-The-Best-v2\\resources\\new\\chromedriver.exe");
-		System.out.println("Started"+System.getProperty("webdriver.chrome.driver"));	
-		}
+		System.setProperty("webdriver.chrome.driver","C:\\Projects\\External Projects\\project\\Pick-The-Best-v2\\resources\\chromedriver.exe");
+	}
 	
 	@Bean
 	public ChromeDriver driver() {
@@ -30,7 +29,6 @@ public class SeliniumConfig {
 		System.setProperty(ChromeDriverService.CHROME_DRIVER_SILENT_OUTPUT_PROPERTY, "true"); 
 		java.util.logging.Logger.getLogger("org.openqa.selenium").setLevel(Level.OFF);
 		return new ChromeDriver(options);
-		
 	}
 	
 }

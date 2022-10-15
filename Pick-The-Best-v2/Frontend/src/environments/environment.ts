@@ -3,13 +3,14 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false,
+  production: true,
   appName : 'Pick The Best',
-  localSearchUri:'http://localhost:8080/local',
-  globalSearchUri:'http://localhost:8080/global',
-  adminSearchuri:'http://localhost:8080/admin',
-  statsUri:'http://localhost:8080/stats',
-  baseUri:'http://localhost:8080',
+  localSearchUri:'http://localhost:9030/local',
+  globalSearchUri:'http://localhost:9030/global',
+  adminSearchuri:'http://localhost:9030/admin',
+  statsUri:'http://localhost:9030/stats',
+  baseUri:'http://localhost:9030',
+  webSocketUri:'http://localhost:9030',
   adminRole:'ADMIN',
   userRole:'USER'
 };

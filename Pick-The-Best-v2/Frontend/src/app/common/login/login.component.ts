@@ -3,7 +3,6 @@ import { Form, NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/service/user-service.service';
 import { UserAuthService } from 'src/app/service/user-auth.service';
-import { ToastrService } from 'ngx-toastr';
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -14,14 +13,19 @@ export class LoginComponent implements OnInit {
   constructor(
     private UserService:UserService,
     private userAuthService:UserAuthService,
-    private router:Router,
-    private toastr: ToastrService
+    private router:Router
   ) { }
 
   ngOnInit(): void {
   }
 
+  errorOccured = false;
+  message = 'Invalid credentials. Please try with valid username and password'
+
   login(loginForm:NgForm){
+
+    this.errorOccured = false
+
     this.UserService.login(loginForm.value).subscribe(
       (response:any) => {
         this.userAuthService.setToken(response.jwtToken)
@@ -36,14 +40,13 @@ export class LoginComponent implements OnInit {
         }else{
           this.router.navigate(['user/search'])
         }
+
       },
       (error) =>{
-        if(error.status = 401){
-          this.toastr.error("Invalid Username or Password", "");
-        }
+        this.errorOccured = true
+        console.log(error)
       }
     )
   }
-  }
 
-
+}

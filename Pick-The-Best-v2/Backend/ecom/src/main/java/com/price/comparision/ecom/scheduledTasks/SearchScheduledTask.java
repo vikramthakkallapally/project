@@ -8,9 +8,8 @@ import org.springframework.cache.annotation.EnableCaching;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
-import com.price.comparision.ecom.bean.Item;
 import com.price.comparision.ecom.constants.BusinessConstants;
-import com.price.comparision.ecom.repository.ItemRepository;
+import com.price.comparision.ecom.model.Item;
 import com.price.comparision.ecom.service.AmazonInterface;
 import com.price.comparision.ecom.service.CostcoInterface;
 import com.price.comparision.ecom.service.DatabaseService;
@@ -45,11 +44,8 @@ public class SearchScheduledTask {
 	@Autowired
 	private TargetInterface targetService;
 	
-	@Autowired
-	private ItemRepository itemrepository;
 	
-	
-	@Scheduled(initialDelay = 5000, fixedDelay = 10000)
+	@Scheduled(initialDelay = 500000000, fixedDelay = 10000)
 	public void globalSearchTask() {
 		List<String> searchTokens = dataBaseService.getSearchTokens();
 		for(String token : searchTokens) {
@@ -62,7 +58,7 @@ public class SearchScheduledTask {
 		
 	}
 	
-	@Scheduled(initialDelay = 5000, fixedDelay = 500000)
+	@Scheduled(initialDelay = 500000000, fixedDelay = 50000)
 	public void localSearchTask() {
 		
 		Long startId = (long) 0;	

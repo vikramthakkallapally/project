@@ -6,8 +6,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.price.comparision.ecom.bean.JwtRequest;
-import com.price.comparision.ecom.bean.JwtResponse;
+import com.price.comparision.ecom.model.JwtRequest;
+import com.price.comparision.ecom.model.JwtResponse;
 import com.price.comparision.ecom.service.JwtService;
 
 

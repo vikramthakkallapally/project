@@ -5,16 +5,16 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 
-import com.price.comparision.ecom.bean.GlobalSearchDetails;
-import com.price.comparision.ecom.bean.GlobalSearchItem;
-import com.price.comparision.ecom.bean.Item;
-import com.price.comparision.ecom.bean.ProductDetails;
 import com.price.comparision.ecom.constants.BusinessConstants;
+import com.price.comparision.ecom.model.GlobalSearchDetails;
+import com.price.comparision.ecom.model.GlobalSearchItem;
+import com.price.comparision.ecom.model.Item;
+import com.price.comparision.ecom.model.ProductDetails;
 import com.price.comparision.ecom.repository.ItemRepository;
 
-@Component
+@Service
 public class ProductDetailService {
 	
 	@Autowired
