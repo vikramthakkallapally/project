@@ -7,9 +7,14 @@ import java.util.Set;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import com.price.comparision.ecom.exception.GeneralBusinessException;
+import com.price.comparision.ecom.exception.MyBusinessException;
+import com.price.comparision.ecom.exception.UserNotFoundException;
 import com.price.comparision.ecom.model.ChatMap;
+import com.price.comparision.ecom.model.ErrorServiceResponse;
 import com.price.comparision.ecom.model.Role;
 import com.price.comparision.ecom.model.User;
 import com.price.comparision.ecom.repository.ChatMapRepo;
@@ -71,11 +76,11 @@ public class ChatService {
                 return chatList;
                 
             }else {
-                throw new RuntimeException("user is not admin");
+                throw new GeneralBusinessException(new ErrorServiceResponse(HttpStatus.BAD_REQUEST,"invalid user role"));
             } 
         }catch(Exception ex) {
             ex.printStackTrace();
-            throw new RuntimeException("user not found");
+            throw new UserNotFoundException();
         }
     }
     
@@ -104,14 +109,18 @@ public class ChatService {
                    chatList.add(String.valueOf(c.getChatId()));
                    
                 }else {
-                    throw new RuntimeException("available admin not found");
+                    throw new GeneralBusinessException(new ErrorServiceResponse(HttpStatus.FORBIDDEN,"admin not available"));
                 }
             }
             
             return chatList;
 
         }catch(Exception ex) {
-            throw new RuntimeException("user not found");
+         
+            if(!(ex instanceof MyBusinessException))
+                throw new UserNotFoundException();
+            else
+                throw ex;
         }
     }
     
@@ -135,7 +144,6 @@ public class ChatService {
             }
             
         }catch(Exception ex) {
-            ex.printStackTrace();
             return false;
         }
     }

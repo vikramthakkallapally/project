@@ -12,6 +12,7 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import com.price.comparision.ecom.exception.InvalidCredentialsException;
 import com.price.comparision.ecom.model.JwtRequest;
 import com.price.comparision.ecom.model.JwtResponse;
 import com.price.comparision.ecom.model.User;
@@ -80,9 +81,9 @@ public class JwtService implements UserDetailsService{
 			authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userName, userPassword));
 			
 		}catch(DisabledException e) {
-			throw new Exception("User is Disabled");
+			throw new InvalidCredentialsException();
 		}catch(BadCredentialsException e) {
-			throw new Exception("Bad Credentials from User");
+			throw new InvalidCredentialsException();
 		}
 		
 	}

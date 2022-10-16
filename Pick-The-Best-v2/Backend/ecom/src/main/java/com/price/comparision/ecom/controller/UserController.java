@@ -11,7 +11,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.price.comparision.ecom.exception.GeneralBusinessException;
+import com.price.comparision.ecom.exception.InvalidOtpException;
 import com.price.comparision.ecom.model.EmailAuthRequest;
+import com.price.comparision.ecom.model.ErrorServiceResponse;
 import com.price.comparision.ecom.model.UpdatePasswordRequest;
 import com.price.comparision.ecom.model.User;
 import com.price.comparision.ecom.service.UserServiceImpl;
@@ -52,7 +55,7 @@ public class UserController {
 			userService.sendOtp(email);
 			return ResponseEntity.status(HttpStatus.OK).build();
 		}catch(Exception ex) {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+		    throw new GeneralBusinessException(new ErrorServiceResponse(HttpStatus.BAD_REQUEST,"invalid email"));
 		}
 	}
 	
@@ -61,7 +64,7 @@ public class UserController {
 		if(userService.verifyOtp(otpAuthRequest)) {
 			return ResponseEntity.status(HttpStatus.OK).build();
 		}else {
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+			throw new InvalidOtpException();
 		}
 		
 	}
@@ -72,7 +75,7 @@ public class UserController {
 		if(userService.updatePassword(updatePassword))
 			return ResponseEntity.status(HttpStatus.OK).build();
 		else
-			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+			throw new GeneralBusinessException(new ErrorServiceResponse(HttpStatus.BAD_REQUEST,"invalid password"));
 		
 	}
 

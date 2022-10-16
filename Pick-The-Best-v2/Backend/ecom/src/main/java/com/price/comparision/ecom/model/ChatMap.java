@@ -5,6 +5,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+
 @Entity
 @Table(name="chat_map")
 public class ChatMap {
@@ -22,18 +23,28 @@ public class ChatMap {
     private String tmpAdminId;
     
     private int status;
-    
+
     public ChatMap() {
         super();
         // TODO Auto-generated constructor stub
+    }
+
+    public ChatMap(Long chatId, String username, String adminname, String tmpUserId, String tmpAdminId, int status) {
+        super();
+        this.chatId = chatId;
+        this.username = username;
+        this.adminname = adminname;
+        this.tmpUserId = tmpUserId;
+        this.tmpAdminId = tmpAdminId;
+        this.status = status;
     }
 
     public Long getChatId() {
         return chatId;
     }
 
-    public void setChatId(Long chatid) {
-        this.chatId = chatid;
+    public void setChatId(Long chatId) {
+        this.chatId = chatId;
     }
 
     public String getUsername() {
@@ -75,5 +86,6 @@ public class ChatMap {
     public void setStatus(int status) {
         this.status = status;
     }
+   
     
 }

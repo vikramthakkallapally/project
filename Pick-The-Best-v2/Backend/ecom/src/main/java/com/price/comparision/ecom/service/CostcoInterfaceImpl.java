@@ -78,7 +78,6 @@ public class CostcoInterfaceImpl implements CostcoInterface {
 					}
 				}catch(Exception e) {
 					//add custom logger here
-					e.printStackTrace();
 				}
 			}	
 			return detail;

@@ -20,9 +20,7 @@ public class MessageController {
 
     @MessageMapping("/chat/{to}")
     public void sendMessage(@DestinationVariable String to, Message message) {
-        
         messageRepo.save(message);
-        System.out.println("handling send message: " + message + " to: " + to);
         simpMessagingTemplate.convertAndSend( "/topic/"+to, message);
     }
     

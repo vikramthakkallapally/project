@@ -5,10 +5,14 @@ import java.util.List;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import com.price.comparision.ecom.exception.GeneralBusinessException;
+import com.price.comparision.ecom.exception.InvalidOtpException;
 import com.price.comparision.ecom.model.Email;
 import com.price.comparision.ecom.model.EmailAuthRequest;
+import com.price.comparision.ecom.model.ErrorServiceResponse;
 import com.price.comparision.ecom.model.OtpAuth;
 import com.price.comparision.ecom.model.Role;
 import com.price.comparision.ecom.model.UpdatePasswordRequest;
@@ -53,7 +57,7 @@ public class UserServiceImpl {
 	        
 	        return userDao.save(user);
 	    }else {
-	        throw new RuntimeException("Invalid otp sent");
+	        throw new InvalidOtpException();
 	    }	
 	}
 
@@ -84,7 +88,7 @@ public class UserServiceImpl {
 			return emailService.sendMail(e);
 			
 		}catch(Exception ex) {
-			throw new RuntimeException("Something went wrong");
+			throw new GeneralBusinessException(new ErrorServiceResponse(HttpStatus.INTERNAL_SERVER_ERROR,"failed to send email"));
 		}
 		
 	}
